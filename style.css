@@ -1,10 +1,29 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #192941;
+    color:white;
+    row-gap: 60px;
+}
+
 #grid {
     display: grid;
     height: 60vh;
     width: 60vh;
     border: 1px grey solid;
+    background-color: white;
 }
 
 .grid-square {
     border: 0.5px grey solid;
+}
+
+#menu-container {
+    display: flex;
+    background-color: aliceblue;
+    border-radius: 3px;
+    column-gap: 5px;
+    padding: 15px;
 }

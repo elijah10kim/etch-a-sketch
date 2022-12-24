@@ -8,8 +8,13 @@ function createGrid(n) {
     for (let i=0; i < n*n; i++) {
         const gridSquare = document.createElement('div');
         gridSquare.classList.add('grid-square');
+        gridSquare.addEventListener('mouseover', fillSquare)
         grid.appendChild(gridSquare);
     }
+}
+
+function fillSquare(e) {
+    e.target.style.background = 'black';
 }
 
 window.onload = () => {

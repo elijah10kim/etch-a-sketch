@@ -5,7 +5,12 @@ body {
     justify-content: space-between;
     background-color: #192941;
     color:white;
+    font-family: 'Oswald', sans-serif;
     row-gap: 60px;
+}
+
+h1 {
+    font-size: 250%;
 }
 
 #grid {
@@ -26,4 +31,12 @@ body {
     border-radius: 3px;
     column-gap: 5px;
     padding: 15px;
+}
+
+button {    
+    font-family: 'Oswald', sans-serif;
+    padding: 8px;
+    background-color: bisque;
+    border: 1px solid rgb(26, 26, 143);
+    border-radius: 3px;
 }

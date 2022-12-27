@@ -2,6 +2,9 @@ const DEFAULT_SIZE = 16;
 
 const grid = document.getElementById('grid');
 
+const singleColourBtn = document.getElementById('single-colour');
+singleColourBtn.addEventListener('click', () => {eraserMode = false})
+
 const clearGridBtn = document.getElementById('clear-grid');
 clearGridBtn.addEventListener('click', clearGrid);
 

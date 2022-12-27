@@ -40,12 +40,8 @@ function eraseSquare(e) {
     }
 }
 
-//add this function as a check to each of click listener functions for
-//single colour button, theme button and eraser button.
-//add it after setting eraserMode value on click
 function setActivePenMode(e) {
     if (!eraserMode && e.target.id == 'eraser') {
-        //toggle css class for (active-button) based on boolean value
         singleColourBtn.classList.toggle('active-pen-mode');
         eraserBtn.classList.toggle('active-pen-mode');
         eraserMode = true;

@@ -14,7 +14,11 @@ resizeGridBtn.addEventListener('click', resizeGrid);
 const eraserBtn = document.getElementById('eraser');
 eraserBtn.addEventListener('click', setActivePenMode);
 
+const multiColourBtn = document.getElementById('multi-colour');
+multiColourBtn.addEventListener('click', setActivePenMode);
+
 let eraserMode = false;
+let rainbowMode = false;
 
 function createGrid(n) {
     grid.style.gridTemplateRows = `repeat(${n}, 1fr)`;
@@ -29,8 +33,11 @@ function createGrid(n) {
 }
 
 function fillSquare(e) {
-    if (!eraserMode) {
+    if (!eraserMode && !rainbowMode) {
         e.target.style.background = 'black';
+    }
+    if (!eraserMode && rainbowMode) {
+        e.target.style.background = getRandomColour();
     }
 }
 
@@ -40,9 +47,21 @@ function eraseSquare(e) {
     }
 }
 
+function getRandomColour() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 function setActivePenMode(e) {
     if (!eraserMode && e.target.id == 'eraser') {
-        singleColourBtn.classList.toggle('active-pen-mode');
+        if (!rainbowMode) {
+            singleColourBtn.classList.toggle('active-pen-mode');
+        } else {
+            multiColourBtn.classList.toggle('active-pen-mode');
+            rainbowMode = false;
+        }
         eraserBtn.classList.toggle('active-pen-mode');
         eraserMode = true;
     }
@@ -50,6 +69,22 @@ function setActivePenMode(e) {
         singleColourBtn.classList.toggle('active-pen-mode');
         eraserBtn.classList.toggle('active-pen-mode');
         eraserMode = false;
+    }
+    if (eraserMode && e.target.id == 'multi-colour') {
+        multiColourBtn.classList.toggle('active-pen-mode');
+        eraserBtn.classList.toggle('active-pen-mode');
+        eraserMode = false;
+        rainbowMode = true;
+    }
+    if (!rainbowMode && !eraserMode && e.target.id == 'multi-colour') {
+        multiColourBtn.classList.toggle('active-pen-mode');
+        singleColourBtn.classList.toggle('active-pen-mode');
+        rainbowMode = true;
+    }
+    if (rainbowMode && !eraserMode && e.target.id == 'single-colour') {
+        multiColourBtn.classList.toggle('active-pen-mode');
+        singleColourBtn.classList.toggle('active-pen-mode');
+        rainbowMode = false;
     }
 }
 

@@ -6,7 +6,7 @@ const singleColourBtn = document.getElementById('single-colour');
 singleColourBtn.addEventListener('click', setActivePenMode)
 
 const clearGridBtn = document.getElementById('clear-grid');
-clearGridBtn.addEventListener('click', clearGrid);
+clearGridBtn.addEventListener('click', () => {clearGrid(false)});
 
 const resizeGridBtn = document.getElementById('grid-size');
 resizeGridBtn.addEventListener('click', resizeGrid);
@@ -19,6 +19,7 @@ multiColourBtn.addEventListener('click', setActivePenMode);
 
 let eraserMode = false;
 let rainbowMode = false;
+let currentSize = DEFAULT_SIZE;
 
 function createGrid(n) {
     grid.style.gridTemplateRows = `repeat(${n}, 1fr)`;
@@ -89,14 +90,30 @@ function setActivePenMode(e) {
 }
 
 function resizeGrid() {
-    let newSize = prompt("How many grid squares per side would you like? Enter a number between 2 and 100.");
+    let newSize;
+    do {
+        newSize = prompt("Enter the number of squares per side (between 2 and 48).");
+        if (!newSize) {
+            newSize = currentSize;
+            break;
+        }
+    } while (!(Number.isInteger(parseInt(newSize))) || newSize > 48 || newSize < 2);
+    currentSize = newSize;
+    clearGrid(true);
+    createGrid(newSize);
 }
 
-function clearGrid() {
-    const gridSquares = document.querySelectorAll('.grid-square');
-    gridSquares.forEach((gridSquare) => {
-        gridSquare.style.background = 'white';
-    })
+function clearGrid(resize) {
+    let gridSquares = document.querySelectorAll('.grid-square');
+    if (resize){
+        gridSquares.forEach((gridSquare) => {
+            gridSquare.remove();
+        })
+    } else {
+        gridSquares.forEach((gridSquare) => {
+            gridSquare.style.background = 'white';
+        })
+    }
 }
 
 window.onload = () => {
